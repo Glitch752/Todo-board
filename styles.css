@@ -3,6 +3,9 @@
     --list-height: 8rem;
 
     --list-color: #5bcc5b;
+    --list-display-margin: 2rem;
+
+    --category-width: 15rem;
 }
 
 body {
@@ -70,4 +73,42 @@ body {
 }
 .list-icon.delete {
     fill: #cf1414;
+}
+
+.list-display {
+    position: absolute;
+    top: var(--list-display-margin);
+    left: var(--list-display-margin);
+    width: calc(100% - var(--list-display-margin) * 2);
+    height: calc(100% - var(--list-display-margin) * 2);
+    border-radius: 0.5rem;
+    background-color: rgb(115, 241, 147);
+    display: none;
+}
+.close-list {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #cf1414;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 0.75;
+}
+.list-name {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.category {
+    width: var(--category-width);
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgb(84, 185, 84);
 }

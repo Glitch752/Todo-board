@@ -1,0 +1,73 @@
+:root {
+    --list-width: 15rem;
+    --list-height: 8rem;
+
+    --list-color: #5bcc5b;
+}
+
+body {
+    font-size: 10px;
+    font-family: sans-serif;
+    background-color: #fafafa;
+    padding: 1rem;
+    margin: 0;
+}
+
+.lists {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.new-list {
+    width: var(--list-width);
+    height: var(--list-height);
+    outline: 0.3rem dashed #000;
+    color: #000;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 0.5rem;
+}
+.list {
+    width: var(--list-width);
+    height: var(--list-height);
+    color: #000;
+    border-radius: 0.5rem;
+    background-color: var(--list-color);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem;
+    position: relative;
+}
+.list-name {
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-icons {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.list-icon {
+    cursor: pointer;
+    margin-left: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.list-icon.delete {
+    fill: #cf1414;
+}

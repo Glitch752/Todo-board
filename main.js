@@ -50,30 +50,74 @@ function openList(index) {
     var list = lists[index];
     var listElem = document.getElementById('list');
     listElem.style.display = "inline-block";
-    listElem.innerHTML = `
+    
+    updateListDisplay(index);
+}
+
+function updateListDisplay(index) {
+    var list = lists[index];
+    var listElem = document.getElementById('list');
+
+    var addHTML = `
         <div class="close-list" onclick="closeList()">X</div>
-        <div class="list-name">${list.name}</div>`;
+        <input onkeyup="updateListName(${index}, this)" type="text" class="list-display-name" value="${list.name}">
+        <div class="list-display-categories">`;
+    
     for (var i = 0; i < list.categories.length; i++) {
-        listElem.innerHTML += `<div class="category">
-            <div class="category-name">${list.categories[i].name}</div>
-            <div class="category-items">
+        addHTML += `
+            <div class="list-display-category">
+                <input onkeyup="updateCategoryName(${index}, ${i}, this)" type="text" class="list-display-category-name" value="${list.categories[i].name}">
                 <div class="new-item" onclick="createItem(${index}, ${i})">+</div>
-            </div>
-        </div>`;
+                <div class="category-items">`;
         for (var j = 0; j < list.categories[i].items.length; j++) {
-            listElem.innerHTML += `<div class="item">
-                <div class="item-name">${list.categories[i].items[j]}</div>
-                <div class="item-icons">
-                    <svg onclick="deleteItem(${index}, ${i}, ${j})" class="item-icon delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"/></svg>
-                </div>
-            </div>`;
+            addHTML += `
+                <div class="list-display-item">
+                    <input onkeyup="updateItemName(${index}, ${i}, ${j}, this)" type="text" class="list-display-item-name" value="${list.categories[i].items[j].name}">
+                    <div class="list-display-item-icons">
+                        <svg onclick="deleteItem(${index}, ${i}, ${j})" class="list-display-item-icon delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"/></svg>
+                    </div>
+                </div>`;
         }
+        addHTML += `</div></div>`;
     }
+
+    listElem.innerHTML = `${addHTML}</div>`;
 }
 
 function closeList() {
     var listElem = document.getElementById('list');
     listElem.style.display = "none";
+    updateLists();
+}
+
+function createItem(listIndex, categoryIndex) {
+    var list = lists[listIndex];
+    list.categories[categoryIndex].items.push({
+        name: 'New Item',
+    });
+    saveData();
+    updateListDisplay(listIndex);
+}
+function deleteItem(listIndex, categoryIndex, itemIndex) {
+    var list = lists[listIndex];
+    list.categories[categoryIndex].items.splice(itemIndex, 1);
+    saveData();
+    updateListDisplay(listIndex);
+}
+function updateItemName(listIndex, categoryIndex, itemIndex, element) {
+    var list = lists[listIndex];
+    list.categories[categoryIndex].items[itemIndex].name = element.value;
+    saveData();
+}
+function updateCategoryName(listIndex, categoryIndex, element) {
+    var list = lists[listIndex];
+    list.categories[categoryIndex].name = element.value;
+    saveData();
+}
+function updateListName(listIndex, element) {
+    var list = lists[listIndex];
+    list.name = element.value;
+    saveData();
 }
 
 function saveData() {

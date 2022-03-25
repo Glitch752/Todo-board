@@ -142,3 +142,40 @@ function deleteCategory(listIndex, categoryIndex) {
 function saveData() {
     localStorage.setItem('lists', JSON.stringify(lists));
 }
+
+function importData() {
+    // import data from .json file
+    var fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.setAttribute('accept', '.json');
+    fileSelector.style.display = 'none';
+
+    fileSelector.click();
+
+    fileSelector.onchange = function() {
+        var file = fileSelector.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var data = JSON.parse(reader.result);
+            lists = data;
+            saveData();
+            updateLists();
+
+            fileSelector.remove();
+        }
+
+        reader.readAsText(file);
+    }
+}
+function exportData() {
+    // export data to .json file
+    var fileSelector = document.createElement('a');
+    fileSelector.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(lists)));
+    fileSelector.setAttribute('download', 'data.json');
+    fileSelector.style.display = 'none';
+
+    document.body.appendChild(fileSelector);
+    fileSelector.click();
+    fileSelector.remove();
+}

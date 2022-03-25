@@ -192,3 +192,25 @@ body {
 .list-display-category-icon.delete {
     fill: #8b2323;
 }
+.corner-icons {
+    margin: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.corner-icon {
+    cursor: pointer;
+    margin-left: 1rem;
+    width: 4rem;
+    height: 4rem;
+}
+.corner-icon.import {
+    fill: #3e8f2a;
+}
+.corner-icon.export {
+    fill: #8f4f2a;
+}

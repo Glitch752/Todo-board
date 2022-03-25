@@ -135,6 +135,7 @@ body {
     outline: none;
     border: none;
     margin-bottom: 0.5rem;
+    width: calc(100% - 4rem);
 }
 .new-item {
     position: absolute;
@@ -158,10 +159,36 @@ body {
     right: 0.5rem;
     position: absolute;
 }
+.list-display-item-icon.delete {
+    fill: #8b2323;
+}
 .list-display-item-name {
     font-size: 1.5rem;
     width: calc(100% - 2.5rem);
     background-color: transparent;
     outline: none;
     border: none;
+}
+.add-category {
+    width: var(--category-width);
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    outline: 0.3rem dashed #000;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+.list-display-category-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    top: 0.5rem;
+    right: 2.5rem;
+    position: absolute;
+}
+.list-display-category-icon.delete {
+    fill: #8b2323;
 }

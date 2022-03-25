@@ -68,6 +68,7 @@ function updateListDisplay(index) {
             <div class="list-display-category">
                 <input onkeyup="updateCategoryName(${index}, ${i}, this)" type="text" class="list-display-category-name" value="${list.categories[i].name}">
                 <div class="new-item" onclick="createItem(${index}, ${i})">+</div>
+                <svg onclick="deleteCategory(${index}, ${i})" class="list-display-category-icon delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"/></svg>
                 <div class="category-items">`;
         for (var j = 0; j < list.categories[i].items.length; j++) {
             addHTML += `
@@ -81,7 +82,10 @@ function updateListDisplay(index) {
         addHTML += `</div></div>`;
     }
 
-    listElem.innerHTML = `${addHTML}</div>`;
+    listElem.innerHTML = `
+            ${addHTML}
+            <div class="add-category" onclick="createCategory(${index})">+</div>
+        </div>`;
 }
 
 function closeList() {
@@ -118,6 +122,21 @@ function updateListName(listIndex, element) {
     var list = lists[listIndex];
     list.name = element.value;
     saveData();
+}
+function createCategory(listIndex) {
+    var list = lists[listIndex];
+    list.categories.push({
+        name: 'New Category',
+        items: []
+    });
+    saveData();
+    updateListDisplay(listIndex);
+}
+function deleteCategory(listIndex, categoryIndex) {
+    var list = lists[listIndex];
+    list.categories.splice(categoryIndex, 1);
+    saveData();
+    updateListDisplay(listIndex);
 }
 
 function saveData() {

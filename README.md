@@ -1,6 +1,6 @@
 # Todo-board
 
-A simple recreation of a to-do board like Trello, entirely client-side. 
+A simple recreation of a kanban board, entirely client-side. 
 
 ## Screenshots
 
